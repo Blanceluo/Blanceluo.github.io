@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>見素</title>
-    <link>https://github.com/Blanceluo/Blanceluo.github.io/</link>
+    <link>https://Blanceluo.github.io/</link>
     <description>Recent content on 見素</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     
-	<atom:link href="https://github.com/Blanceluo/Blanceluo.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://Blanceluo.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>
