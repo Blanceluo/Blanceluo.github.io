@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://Blanceluo.github.io/sitemap.xml
