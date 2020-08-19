@@ -16,14 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="hasayake.luo" /><meta name="description" content="介绍 目前本人所在的是一家主营广告营销平台的公司，主要是利用公司在海外广告浸淫多年的行业经验，帮助国内各大中小型企业出海的广告投放。 其中也不乏" /><meta name="keywords" content="见素, 博客, 个人博客, Hugo, theme, even" />
+<meta name="author" content="hasayake.luo" /><meta name="description" content="介绍 目前本人所在的是一家主营广告营销平台的公司，主要是利用公司在海外广告浸淫多年的行业经验，帮助国内各大中小型企业出海的广告投放。 其中也不乏" /><meta name="keywords" content="见素, 博客, 个人博客, 技术博客" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+
 
 
 <link rel="canonical" href="https://Blanceluo.github.io/post/tableau-expand-drag/" />
@@ -50,11 +50,11 @@
 <meta itemprop="description" content="介绍 目前本人所在的是一家主营广告营销平台的公司，主要是利用公司在海外广告浸淫多年的行业经验，帮助国内各大中小型企业出海的广告投放。 其中也不乏">
 <meta itemprop="datePublished" content="2020-08-18T16:58:40+08:00" />
 <meta itemprop="dateModified" content="2020-08-18T16:58:40+08:00" />
-<meta itemprop="wordCount" content="623">
+<meta itemprop="wordCount" content="692">
 
 
 
-<meta itemprop="keywords" content="web,BI,随想," />
+<meta itemprop="keywords" content="web,js,BI,随想," />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="从 BI-Tableau Online 交互方法延申的拖曳改变高度"/>
 <meta name="twitter:description" content="介绍 目前本人所在的是一家主营广告营销平台的公司，主要是利用公司在海外广告浸淫多年的行业经验，帮助国内各大中小型企业出海的广告投放。 其中也不乏"/>
@@ -130,7 +130,7 @@
         <div class="post-category">
             <a href="/categories/%E6%8A%80%E6%9C%AF/"> 技术 </a>
             </div>
-          <span class="more-meta"> 约 623 字 </span>
+          <span class="more-meta"> 约 692 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
         
       </div>
@@ -160,12 +160,14 @@
 <p>目前本人所在的是一家主营广告营销平台的公司，主要是利用公司在海外广告浸淫多年的行业经验，帮助国内各大中小型企业出海的广告投放。
 其中也不乏快手，抖音这样的人人皆知的客户。</p>
 <p>技术部门主要是为公司工具化的开发。因某些因素的缘故，公司对技术部门的业务战略进行了重新的定位，以及期望的提高。
-致本人目前负责的若干个项目可能有 break change级的变化。
+致本人目前负责的若干个项目可能有 <em>break change</em> 级的变化。
 最大的变化是可能会引入计算引擎，以此帮助我们对在项目中的数据有了更高级的分析能力。
-Tableau 便是BI范畴内的一个数据可视化分析服务，不同于我们对于简单的数据可视化框架的认知。
-它集成的是一整套服务, Desktop，Server，Online 等等。</p>
+<strong><a href="https://www.tableau.com/">Tableau</a></strong> 便是 <em>BI</em> 范畴内的一个数据可视化分析服务，不同于我们对于简单的数据可视化框架的认知。
+它集成的是一整套服务, <em>Desktop，Server，Online</em> 等等。</p>
 <p>让我对它们有兴趣的不是这所谓的优质服务，而是一些操作交互方式。页面的模块可拖曳。
-实现类似的功能很简单，但若要做好整个页面的模块交互可非我们所想的那么简单。</p>
+实现类似的功能很简单，但若要做好整个页面的模块交互远不如此。</p>
+<p><strong>本人便思考如何实现 Tableau 对于全局的拖曳交互，以下的代码示例只是实现其中一个基本的拖曳改变高度之功能。
+以印证本人之思路，更多细节不在此细说。代码简单，无需注释，仅此记录。</strong></p>
 <h3 id="code-example">Code Example</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -213,9 +215,9 @@ Tableau 便是BI范畴内的一个数据可视化分析服务，不同于我们�
 <span class="nt">div</span> <span class="p">{</span>
   <span class="k">width</span><span class="p">:</span> <span class="mi">200</span><span class="kt">px</span><span class="p">;</span>
   <span class="k">height</span><span class="p">:</span> <span class="mi">200</span><span class="kt">px</span><span class="p">;</span>
+  <span class="k">margin-top</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
   <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
   <span class="k">position</span><span class="p">:</span> <span class="kc">relative</span><span class="p">;</span>
-  <span class="k">margin-top</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="nt">section</span> <span class="p">{</span>
@@ -357,6 +359,7 @@ Tableau 便是BI范畴内的一个数据可视化分析服务，不同于我们�
 <footer class="post-footer">
       <div class="post-tags">
           <a href="/tags/web/">web</a>
+          <a href="/tags/js/">js</a>
           <a href="/tags/bi/">BI</a>
           <a href="/tags/%E9%9A%8F%E6%83%B3/">随想</a>
           </div>
