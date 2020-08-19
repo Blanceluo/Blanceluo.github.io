@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Even - A super concise theme for Hugo</title>
-    <link>https://Blanceluo.github.io/</link>
-    <description>Recent content on Even - A super concise theme for Hugo</description>
+    <title>BI on Even - A super concise theme for Hugo</title>
+    <link>https://Blanceluo.github.io/tags/bi/</link>
+    <description>Recent content in BI on Even - A super concise theme for Hugo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 18 Aug 2020 16:58:40 +0800</lastBuildDate>
     
-	<atom:link href="https://Blanceluo.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://Blanceluo.github.io/tags/bi/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>About</title>
-      <link>https://Blanceluo.github.io/about/</link>
-      <pubDate>Wed, 19 Aug 2020 14:50:08 +0800</pubDate>
-      
-      <guid>https://Blanceluo.github.io/about/</guid>
-      <description>关于本站 在使用类似的静态博客生成工具之前，已使用 React 与 Node 对个人博客网站的构建。 不断地折腾，在Web，Server，Nginx 中折腾来去。 也从中</description>
-    </item>
     
     <item>
       <title>从 BI-Tableau Online 交互方法延申的拖曳改变高度</title>
