@@ -1,429 +1,176 @@
-<!DOCTYPE html>
-<html lang="zh-cn">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>从 BI-Tableau Online 交互方法延申的拖曳改变高度 - 见素</title>
-  <meta name="renderer" content="webkit" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-<meta name="theme-color" content="#f8f5ec" />
-<meta name="msapplication-navbutton-color" content="#f8f5ec">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
-
-
-<meta name="author" content="hasayake.luo" /><meta name="description" content="介绍 目前本人所在的是一家主营广告营销平台的公司，主要是利用公司在海外广告浸淫多年的行业经验，帮助国内各大中小型企业出海的广告投放。 其中也不乏" /><meta name="keywords" content="见素, 博客, 个人博客, 技术博客" />
-
-
-
-
-
-
-
-
-
-<link rel="canonical" href="https://Blanceluo.github.io/post/tableau-expand-drag/" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/manifest.json">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-
-
-
-<link href="/sass/main.min.8c3cbcb0324c2bb4875ceccba4007cbad4b4ac8377f33af9953c3e7684534a50.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/insert.css">
-
-
-<meta property="og:title" content="从 BI-Tableau Online 交互方法延申的拖曳改变高度" />
-<meta property="og:description" content="介绍 目前本人所在的是一家主营广告营销平台的公司，主要是利用公司在海外广告浸淫多年的行业经验，帮助国内各大中小型企业出海的广告投放。 其中也不乏" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://Blanceluo.github.io/post/tableau-expand-drag/" />
-<meta property="article:published_time" content="2020-08-18T16:58:40+08:00" />
-<meta property="article:modified_time" content="2020-08-18T16:58:40+08:00" />
-<meta itemprop="name" content="从 BI-Tableau Online 交互方法延申的拖曳改变高度">
-<meta itemprop="description" content="介绍 目前本人所在的是一家主营广告营销平台的公司，主要是利用公司在海外广告浸淫多年的行业经验，帮助国内各大中小型企业出海的广告投放。 其中也不乏">
-<meta itemprop="datePublished" content="2020-08-18T16:58:40+08:00" />
-<meta itemprop="dateModified" content="2020-08-18T16:58:40+08:00" />
-<meta itemprop="wordCount" content="692">
-
-
-
-<meta itemprop="keywords" content="web,js,BI,随想," />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="从 BI-Tableau Online 交互方法延申的拖曳改变高度"/>
-<meta name="twitter:description" content="介绍 目前本人所在的是一家主营广告营销平台的公司，主要是利用公司在海外广告浸淫多年的行业经验，帮助国内各大中小型企业出海的广告投放。 其中也不乏"/>
-
-<!--[if lte IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
-<![endif]-->
-
-<!--[if lt IE 9]>
-  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
-<![endif]-->
-
-</head>
-<body>
-  <div id="mobile-navbar" class="mobile-navbar">
-  <div class="mobile-header-logo">
-    <a href="/" class="logo">見素</a>
-  </div>
-  <div class="mobile-navbar-icon">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</div>
-<nav id="mobile-menu" class="mobile-menu slideout-menu">
-  <ul class="mobile-menu-list">
-    <a href="/">
-        <li class="mobile-menu-item">首页</li>
-      </a><a href="/post/">
-        <li class="mobile-menu-item">归档</li>
-      </a><a href="/tags/">
-        <li class="mobile-menu-item">标签</li>
-      </a><a href="/about/">
-        <li class="mobile-menu-item">关于</li>
-      </a>
-  </ul>
-</nav>
-  <div class="container" id="mobile-panel">
-    <header id="header" class="header">
-        <div class="logo-wrapper">
-  <a href="/" class="logo">見素<i style="font-size:14px; font-family: 'Microsoft YaHei',SimSun; margin-left: 16px;">
-      光影，黑白，内外，我们走在镜之边缘。
-    </i>
-  </a>
-</div>
-
-<nav class="site-navbar">
-  <ul id="menu" class="menu">
-    <li class="menu-item">
-        <a class="menu-item-link" href="/">首页</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/post/">归档</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/tags/">标签</a>
-      </li><li class="menu-item">
-        <a class="menu-item-link" href="/about/">关于</a>
-      </li>
-  </ul>
-</nav>
-    </header>
-
-    <main id="main" class="main">
-      <div class="content-wrapper">
-        <div id="content" class="content">
-          <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">从 BI-Tableau Online 交互方法延申的拖曳改变高度</h1>
-
-      <div class="post-meta">
-        <span class="post-time"> 2020-08-18 </span>
-        <div class="post-category">
-            <a href="/categories/%E6%8A%80%E6%9C%AF/"> 技术 </a>
-            </div>
-          <span class="more-meta"> 约 692 字 </span>
-          <span class="more-meta"> 预计阅读 2 分钟 </span>
-        
-      </div>
-    </header>
-
-    <div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content always-active">
-    <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li>
-          <ul>
-            <li><a href="#介绍">介绍</a></li>
-            <li><a href="#code-example">Code Example</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-  </div>
-</div>
-    <div class="post-content">
-      <h3 id="介绍">介绍</h3>
-<p>目前本人所在的是一家主营广告营销平台的公司，主要是利用公司在海外广告浸淫多年的行业经验，帮助国内各大中小型企业出海的广告投放。
-其中也不乏快手，抖音这样的人人皆知的客户。</p>
-<p>技术部门主要是为公司工具化的开发。因某些因素的缘故，公司对技术部门的业务战略进行了重新的定位，以及期望的提高。
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>由 BI-Tableau Online 交互方法延申的拖曳改变高度实践 - 见素</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content="no-transform"><meta http-equiv=cache-control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="hasayake.luo"><meta name=description content="介绍 目前本人所在的是一家主营广告营销平台的公司，主要是利用公司在海外广告浸淫多年的行业经验，帮助国内各大中小型企业出海的广告投放。 其中也不乏"><meta name=keywords content="见素,博客,个人博客,技术博客"><link rel=canonical href=https://Blanceluo.github.io/post/tableau-expand-drag/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><link href=/sass/main.min.3f9fda834fb904d4bb367ecb307b14cf764403fe18d5acd20552d574396586ae.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/insert.css><meta property="og:title" content="由 BI-Tableau Online 交互方法延申的拖曳改变高度实践"><meta property="og:description" content="介绍 目前本人所在的是一家主营广告营销平台的公司，主要是利用公司在海外广告浸淫多年的行业经验，帮助国内各大中小型企业出海的广告投放。 其中也不乏"><meta property="og:type" content="article"><meta property="og:url" content="https://Blanceluo.github.io/post/tableau-expand-drag/"><meta property="article:published_time" content="2020-08-18T16:58:40+08:00"><meta property="article:modified_time" content="2020-08-18T16:58:40+08:00"><meta itemprop=name content="由 BI-Tableau Online 交互方法延申的拖曳改变高度实践"><meta itemprop=description content="介绍 目前本人所在的是一家主营广告营销平台的公司，主要是利用公司在海外广告浸淫多年的行业经验，帮助国内各大中小型企业出海的广告投放。 其中也不乏"><meta itemprop=datePublished content="2020-08-18T16:58:40+08:00"><meta itemprop=dateModified content="2020-08-18T16:58:40+08:00"><meta itemprop=wordCount content="692"><meta itemprop=keywords content="web,js,bi,随想,"><meta name=twitter:card content="summary"><meta name=twitter:title content="由 BI-Tableau Online 交互方法延申的拖曳改变高度实践"><meta name=twitter:description content="介绍 目前本人所在的是一家主营广告营销平台的公司，主要是利用公司在海外广告浸淫多年的行业经验，帮助国内各大中小型企业出海的广告投放。 其中也不乏"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script><script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>見素</a></div><div class=mobile-navbar-icon><span></span><span></span><span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/><li class=mobile-menu-item>首页</li></a><a href=/post/><li class=mobile-menu-item>归档</li></a><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/about/><li class=mobile-menu-item>关于</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>見素<i style="font-size:14px;font-family:microsoft yahei,SimSun;margin-left:16px">
+光影，黑白，内外，我们走在镜之边缘。</i></a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/>首页</a></li><li class=menu-item><a class=menu-item-link href=/post/>归档</a></li><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/about/>关于</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>由 BI-Tableau Online 交互方法延申的拖曳改变高度实践</h1><div class=post-meta><span class=post-time>2020-08-18</span><div class=post-category><a href=/categories/%E6%8A%80%E6%9C%AF/>技术</a></div><span class=more-meta>约 692 字</span>
+<span class=more-meta>预计阅读 2 分钟</span>
+<span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><ul><li><ul><li><a href=#介绍>介绍</a></li><li><a href=#code-example>Code Example</a></li></ul></li></ul></li></ul></nav></div></div><div class=post-content><h3 id=介绍>介绍</h3><p>目前本人所在的是一家主营广告营销平台的公司，主要是利用公司在海外广告浸淫多年的行业经验，帮助国内各大中小型企业出海的广告投放。
+其中也不乏快手，抖音这样的人人皆知的客户。</p><p>技术部门主要是为公司工具化的开发。因某些因素的缘故，公司对技术部门的业务战略进行了重新的定位，以及期望的提高。
 致本人目前负责的若干个项目可能有 <em>break change</em> 级的变化。
 最大的变化是可能会引入计算引擎，以此帮助我们对在项目中的数据有了更高级的分析能力。
-<strong><a href="https://www.tableau.com/">Tableau</a></strong> 便是 <em>BI</em> 范畴内的一个数据可视化分析服务，不同于我们对于简单的数据可视化框架的认知。
-它集成的是一整套服务, <em>Desktop，Server，Online</em> 等等。</p>
-<p>让我对它们有兴趣的不是这所谓的优质服务，而是一些操作交互方式。页面的模块可拖曳。
-实现类似的功能很简单，但若要做好整个页面的模块交互远不如此。</p>
-<p><strong>本人便思考如何实现 Tableau 对于全局的拖曳交互，以下的代码示例只是实现其中一个基本的拖曳改变高度之功能。
-以印证本人之思路，更多细节不在此细说。代码简单，无需注释，仅此记录。</strong></p>
-<h3 id="code-example">Code Example</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span>
-<span class="nt">body</span> <span class="p">{</span>
-  <span class="c">/* margin-top: 200px; */</span>
-  <span class="k">height</span><span class="p">:</span> <span class="mi">100</span><span class="kt">vh</span><span class="p">;</span>
-  <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+<strong><a href=https://www.tableau.com/>Tableau</a></strong> 便是 <em>BI</em> 范畴内的一个数据可视化分析服务，不同于我们对于简单的数据可视化框架的认知。
+它集成的是一整套服务, <em>Desktop，Server，Online</em> 等等。</p><p>让我对它们有兴趣的不是这所谓的优质服务，而是一些操作交互方式。页面的模块可拖曳。
+实现类似的功能很简单，但若要做好整个页面的模块交互远不如此。</p><p><strong>本人便思考如何实现 Tableau 对于全局的拖曳交互，以下的代码示例只是实现其中一个基本的拖曳改变高度之功能。
+以印证本人之思路，更多细节不在此细说。代码简单，无需注释，仅此记录。</strong></p><h3 id=code-example>Code Example</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>style</span><span class=p>&gt;</span>
+<span class=nt>body</span> <span class=p>{</span>
+  <span class=c>/* margin-top: 200px; */</span>
+  <span class=k>height</span><span class=p>:</span> <span class=mi>100</span><span class=kt>vh</span><span class=p>;</span>
+  <span class=k>margin</span><span class=p>:</span> <span class=mi>0</span><span class=p>;</span>
+<span class=p>}</span>
 
-<span class="nt">div</span> <span class="p">{</span>
-  <span class="k">width</span><span class="p">:</span> <span class="mi">200</span><span class="kt">px</span><span class="p">;</span>
-  <span class="k">height</span><span class="p">:</span> <span class="mi">200</span><span class="kt">px</span><span class="p">;</span>
-  <span class="k">margin-top</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="k">border</span><span class="p">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="kc">solid</span> <span class="kc">red</span><span class="p">;</span>
-  <span class="k">position</span><span class="p">:</span> <span class="kc">relative</span><span class="p">;</span>
-<span class="p">}</span>
+<span class=nt>div</span> <span class=p>{</span>
+  <span class=k>width</span><span class=p>:</span> <span class=mi>200</span><span class=kt>px</span><span class=p>;</span>
+  <span class=k>height</span><span class=p>:</span> <span class=mi>200</span><span class=kt>px</span><span class=p>;</span>
+  <span class=k>margin-top</span><span class=p>:</span> <span class=mi>0</span><span class=p>;</span>
+  <span class=k>border</span><span class=p>:</span> <span class=mi>1</span><span class=kt>px</span> <span class=kc>solid</span> <span class=kc>red</span><span class=p>;</span>
+  <span class=k>position</span><span class=p>:</span> <span class=kc>relative</span><span class=p>;</span>
+<span class=p>}</span>
 
-<span class="nt">section</span> <span class="p">{</span>
-  <span class="k">width</span><span class="p">:</span> <span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
-  <span class="k">height</span><span class="p">:</span> <span class="mi">2</span><span class="kt">px</span><span class="p">;</span>
-  <span class="k">background-color</span><span class="p">:</span> <span class="mh">#999</span><span class="p">;</span>
-  <span class="k">cursor</span><span class="p">:</span> <span class="kc">n-resize</span><span class="p">;</span>
-  <span class="k">position</span><span class="p">:</span> <span class="kc">absolute</span><span class="p">;</span>
-  <span class="k">left</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="k">top</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+<span class=nt>section</span> <span class=p>{</span>
+  <span class=k>width</span><span class=p>:</span> <span class=mi>100</span><span class=kt>%</span><span class=p>;</span>
+  <span class=k>height</span><span class=p>:</span> <span class=mi>2</span><span class=kt>px</span><span class=p>;</span>
+  <span class=k>background-color</span><span class=p>:</span> <span class=mh>#999</span><span class=p>;</span>
+  <span class=k>cursor</span><span class=p>:</span> <span class=kc>n-resize</span><span class=p>;</span>
+  <span class=k>position</span><span class=p>:</span> <span class=kc>absolute</span><span class=p>;</span>
+  <span class=k>left</span><span class=p>:</span> <span class=mi>0</span><span class=p>;</span>
+  <span class=k>top</span><span class=p>:</span> <span class=mi>0</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=p>&lt;/</span><span class=nt>style</span><span class=p>&gt;</span>
 
-<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">section</span> <span class="na">data-type</span><span class="o">=</span><span class="s">&#34;resize&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>123<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class=p>&lt;</span><span class=nt>body</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>div</span><span class=p>&gt;</span>
+    <span class=p>&lt;</span><span class=nt>section</span> <span class=na>data-type</span><span class=o>=</span><span class=s>&#34;resize&#34;</span><span class=p>&gt;&lt;/</span><span class=nt>section</span><span class=p>&gt;</span>
+    <span class=p>&lt;</span><span class=nt>span</span><span class=p>&gt;</span>123<span class=p>&lt;/</span><span class=nt>span</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>body</span><span class=p>&gt;</span>
 
-</code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span><span class="lnt">35
-</span><span class="lnt">36
-</span><span class="lnt">37
-</span><span class="lnt">38
-</span><span class="lnt">39
-</span><span class="lnt">40
-</span><span class="lnt">41
-</span><span class="lnt">42
-</span><span class="lnt">43
-</span><span class="lnt">44
-</span><span class="lnt">45
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">startY</span> <span class="o">=</span> <span class="mi">0</span>
-  <span class="kd">let</span> <span class="nx">endY</span> <span class="o">=</span> <span class="mi">0</span>
-  <span class="kd">let</span> <span class="nx">nodeLine</span> <span class="o">=</span> <span class="kc">null</span>
+</code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-javascript data-lang=javascript><span class=p>(()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+  <span class=kd>let</span> <span class=nx>startY</span> <span class=o>=</span> <span class=mi>0</span>
+  <span class=kd>let</span> <span class=nx>endY</span> <span class=o>=</span> <span class=mi>0</span>
+  <span class=kd>let</span> <span class=nx>nodeLine</span> <span class=o>=</span> <span class=kc>null</span>
 
-  <span class="kr">const</span> <span class="nx">moveHandler</span> <span class="o">=</span> <span class="nx">e</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="nx">endY</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span>
-    <span class="nx">nodeLine</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="nx">endY</span> <span class="o">-</span> <span class="nx">startY</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span>
-  <span class="p">}</span>
+  <span class=kr>const</span> <span class=nx>moveHandler</span> <span class=o>=</span> <span class=nx>e</span> <span class=p>=&gt;</span> <span class=p>{</span>
+    <span class=nx>endY</span> <span class=o>=</span> <span class=nx>e</span><span class=p>.</span><span class=nx>clientY</span>
+    <span class=nx>nodeLine</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>top</span> <span class=o>=</span> <span class=nx>endY</span> <span class=o>-</span> <span class=nx>startY</span> <span class=o>+</span> <span class=s1>&#39;px&#39;</span>
+  <span class=p>}</span>
 
-  <span class="kr">const</span> <span class="nx">downHandler</span> <span class="o">=</span> <span class="nx">e</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">()</span>
+  <span class=kr>const</span> <span class=nx>downHandler</span> <span class=o>=</span> <span class=nx>e</span> <span class=p>=&gt;</span> <span class=p>{</span>
+    <span class=nx>e</span><span class=p>.</span><span class=nx>preventDefault</span><span class=p>()</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">dataset</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">])</span> <span class="p">{</span>
-      <span class="nx">nodeLine</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span>
-      <span class="nx">startY</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">clientY</span>
+    <span class=k>if</span> <span class=p>(</span><span class=nx>e</span><span class=p>.</span><span class=nx>target</span><span class=p>.</span><span class=nx>dataset</span><span class=p>[</span><span class=s1>&#39;type&#39;</span><span class=p>])</span> <span class=p>{</span>
+      <span class=nx>nodeLine</span> <span class=o>=</span> <span class=nx>e</span><span class=p>.</span><span class=nx>target</span>
+      <span class=nx>startY</span> <span class=o>=</span> <span class=nx>e</span><span class=p>.</span><span class=nx>clientY</span>
 
-      <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;mousemove&#39;</span><span class="p">,</span> <span class="nx">moveHandler</span><span class="p">,</span> <span class="kc">false</span><span class="p">)</span>
-      <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;mouseup&#39;</span><span class="p">,</span> <span class="nx">upHandler</span><span class="p">,</span> <span class="kc">false</span><span class="p">)</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
+      <span class=nb>document</span><span class=p>.</span><span class=nx>addEventListener</span><span class=p>(</span><span class=s1>&#39;mousemove&#39;</span><span class=p>,</span> <span class=nx>moveHandler</span><span class=p>,</span> <span class=kc>false</span><span class=p>)</span>
+      <span class=nb>document</span><span class=p>.</span><span class=nx>addEventListener</span><span class=p>(</span><span class=s1>&#39;mouseup&#39;</span><span class=p>,</span> <span class=nx>upHandler</span><span class=p>,</span> <span class=kc>false</span><span class=p>)</span>
+    <span class=p>}</span>
+  <span class=p>}</span>
 
-  <span class="kr">const</span> <span class="nx">upHandler</span> <span class="o">=</span> <span class="nx">e</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="kr">const</span> <span class="nx">parent</span> <span class="o">=</span> <span class="nx">nodeLine</span><span class="p">.</span><span class="nx">parentNode</span>
-    <span class="kr">const</span> <span class="nx">height</span> <span class="o">=</span> <span class="o">+</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">getComputedStyle</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="kc">null</span><span class="p">).</span><span class="nx">getPropertyValue</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/px/g</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
-    <span class="kr">const</span> <span class="nx">marginTop</span> <span class="o">=</span> <span class="o">+</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">getComputedStyle</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="kc">null</span><span class="p">).</span><span class="nx">getPropertyValue</span><span class="p">(</span><span class="s1">&#39;margin-top&#39;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/px/g</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+  <span class=kr>const</span> <span class=nx>upHandler</span> <span class=o>=</span> <span class=nx>e</span> <span class=p>=&gt;</span> <span class=p>{</span>
+    <span class=kr>const</span> <span class=nx>parent</span> <span class=o>=</span> <span class=nx>nodeLine</span><span class=p>.</span><span class=nx>parentNode</span>
+    <span class=kr>const</span> <span class=nx>height</span> <span class=o>=</span> <span class=o>+</span><span class=p>(</span><span class=nb>window</span><span class=p>.</span><span class=nx>getComputedStyle</span><span class=p>(</span><span class=nx>parent</span><span class=p>,</span> <span class=kc>null</span><span class=p>).</span><span class=nx>getPropertyValue</span><span class=p>(</span><span class=s1>&#39;height&#39;</span><span class=p>).</span><span class=nx>replace</span><span class=p>(</span><span class=sr>/px/g</span><span class=p>,</span> <span class=s1>&#39;&#39;</span><span class=p>))</span>
+    <span class=kr>const</span> <span class=nx>marginTop</span> <span class=o>=</span> <span class=o>+</span><span class=p>(</span><span class=nb>window</span><span class=p>.</span><span class=nx>getComputedStyle</span><span class=p>(</span><span class=nx>parent</span><span class=p>,</span> <span class=kc>null</span><span class=p>).</span><span class=nx>getPropertyValue</span><span class=p>(</span><span class=s1>&#39;margin-top&#39;</span><span class=p>).</span><span class=nx>replace</span><span class=p>(</span><span class=sr>/px/g</span><span class=p>,</span> <span class=s1>&#39;&#39;</span><span class=p>))</span>
 
-    <span class="nx">parent</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">cssText</span> <span class="o">=</span> <span class="sb">`
-</span><span class="sb">      height: </span><span class="si">${</span><span class="nx">height</span> <span class="o">-</span> <span class="p">(</span><span class="nx">endY</span> <span class="o">-</span> <span class="nx">startY</span><span class="p">)</span><span class="si">}</span><span class="sb">px;
-</span><span class="sb">      margin-top: </span><span class="si">${</span><span class="nx">marginTop</span> <span class="o">+</span> <span class="p">(</span><span class="nx">endY</span> <span class="o">-</span> <span class="nx">startY</span><span class="p">)</span><span class="si">}</span><span class="sb">px;
-</span><span class="sb">    `</span>
-    <span class="nx">nodeLine</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+    <span class=nx>parent</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>cssText</span> <span class=o>=</span> <span class=sb>`
+</span><span class=sb>      height: </span><span class=si>${</span><span class=nx>height</span> <span class=o>-</span> <span class=p>(</span><span class=nx>endY</span> <span class=o>-</span> <span class=nx>startY</span><span class=p>)</span><span class=si>}</span><span class=sb>px;
+</span><span class=sb>      margin-top: </span><span class=si>${</span><span class=nx>marginTop</span> <span class=o>+</span> <span class=p>(</span><span class=nx>endY</span> <span class=o>-</span> <span class=nx>startY</span><span class=p>)</span><span class=si>}</span><span class=sb>px;
+</span><span class=sb>    `</span>
+    <span class=nx>nodeLine</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>top</span> <span class=o>=</span> <span class=s1>&#39;0&#39;</span>
 
-    <span class="c1">// 状态重置
-</span><span class="c1"></span>    <span class="nx">startY</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="nx">endY</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="nx">nodeLine</span> <span class="o">=</span> <span class="kc">null</span>
+    <span class=c1>// 状态重置
+</span><span class=c1></span>    <span class=nx>startY</span> <span class=o>=</span> <span class=mi>0</span>
+    <span class=nx>endY</span> <span class=o>=</span> <span class=mi>0</span>
+    <span class=nx>nodeLine</span> <span class=o>=</span> <span class=kc>null</span>
 
-    <span class="c1">// 移除绑定事件
-</span><span class="c1"></span>    <span class="nb">document</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">&#39;mousemove&#39;</span><span class="p">,</span> <span class="nx">moveHandler</span><span class="p">,</span> <span class="kc">false</span><span class="p">)</span>
-    <span class="nb">document</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s1">&#39;mouseup&#39;</span><span class="p">,</span> <span class="nx">upHandler</span><span class="p">,</span> <span class="kc">false</span><span class="p">)</span>
-  <span class="p">}</span>
+    <span class=c1>// 移除绑定事件
+</span><span class=c1></span>    <span class=nb>document</span><span class=p>.</span><span class=nx>removeEventListener</span><span class=p>(</span><span class=s1>&#39;mousemove&#39;</span><span class=p>,</span> <span class=nx>moveHandler</span><span class=p>,</span> <span class=kc>false</span><span class=p>)</span>
+    <span class=nb>document</span><span class=p>.</span><span class=nx>removeEventListener</span><span class=p>(</span><span class=s1>&#39;mouseup&#39;</span><span class=p>,</span> <span class=nx>upHandler</span><span class=p>,</span> <span class=kc>false</span><span class=p>)</span>
+  <span class=p>}</span>
 
-  <span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;mousedown&#39;</span><span class="p">,</span> <span class="nx">downHandler</span><span class="p">,</span> <span class="kc">false</span><span class="p">)</span>
-<span class="p">})()</span>
-</code></pre></td></tr></table>
-</div>
-</div>
-    </div>
-
-    <div class="post-copyright">
-  <p class="copyright-item">
-    <span class="item-title">文章作者</span>
-    <span class="item-content">hasayake.luo</span>
-  </p>
-  <p class="copyright-item">
-    <span class="item-title">上次更新</span>
-    <span class="item-content">
-        2020-08-18
-        
-    </span>
-  </p>
-  
-  <p class="copyright-item">
-    <span class="item-title">许可协议</span>
-    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
-  </p>
-</div>
-<footer class="post-footer">
-      <div class="post-tags">
-          <a href="/tags/web/">web</a>
-          <a href="/tags/js/">js</a>
-          <a href="/tags/bi/">BI</a>
-          <a href="/tags/%E9%9A%8F%E6%83%B3/">随想</a>
-          </div>
-      <nav class="post-nav">
-        
-        
-      </nav>
-    </footer>
-  </article>
-        </div>
-        
-
-  
-
-  
-
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="social-links">
-      <a target="_blank" href="mailto:hasayake97@foxmail.com" class="iconfont icon-email" title="email"></a>
-      <a target="_blank" href="https://github.com/Blanceluo" class="iconfont icon-github" title="github"></a>
-  
-</div>
-
-<div class="copyright">
-  
-
-  <div class="signature">光影，黑白，内外，我们走在镜之边缘。</div>
-
-  
-
-  <span class="copyright-year">
-    &copy;
-    2017 -
-    2020
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">hasayake.luo</span>
-  </span>
-</div>
-    </footer>
-
-    <div class="back-to-top" id="back-to-top">
-      <i class="iconfont icon-up"></i>
-    </div>
-  </div>
-  
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-
-
-
-<script type="text/javascript" src="/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js"></script>
-
-
-
-
-
-
-
-
-</body>
-</html>
+  <span class=nb>document</span><span class=p>.</span><span class=nx>addEventListener</span><span class=p>(</span><span class=s1>&#39;mousedown&#39;</span><span class=p>,</span> <span class=nx>downHandler</span><span class=p>,</span> <span class=kc>false</span><span class=p>)</span>
+<span class=p>})()</span>
+</code></pre></td></tr></table></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>hasayake.luo</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2020-08-18</span></p><p class=copyright-item><span class=item-title>许可协议</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span></p></div><footer class=post-footer><div class=post-tags><a href=/tags/web/>web</a>
+<a href=/tags/js/>js</a>
+<a href=/tags/bi/>bi</a>
+<a href=/tags/%E9%9A%8F%E6%83%B3/>随想</a></div><nav class=post-nav></nav></footer></article></div></div></main><footer id=footer class=footer><div class=social-links><a target=_blank href=mailto:hasayake97@foxmail.com class="iconfont icon-email" title=email></a><a target=_blank href=https://github.com/Blanceluo class="iconfont icon-github" title=github></a></div><div class=copyright><div class=signature>光影，黑白，内外，我们走在镜之边缘。</div><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次</span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy;
+2017 -
+2020
+<span class=heart><i class="iconfont icon-heart"></i></span><span class=author>hasayake.luo</span></span></div></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.min.js integrity="sha256-jwCP0NAdCBloaIWTWHmW4i3snUNMHUNO+jr9rYd2iOI=" crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/timeago.js@3.0.2/dist/timeago.locales.min.js integrity="sha256-ZwofwC1Lf/faQCzN7nZtfijVV6hSwxjQMwXL4gn9qU8=" crossorigin=anonymous></script><script>var languageCode="zh-cn".replace(/-/g,'_').replace(/_(.*)/,function($0,$1){return $0.replace($1,$1.toUpperCase());});timeago().render(document.querySelectorAll('.timeago'),languageCode);timeago.cancel();</script><script type=text/javascript src=/js/main.min.d7b7ada643c9c1a983026e177f141f7363b4640d619caf01d8831a6718cd44ea.js></script></body></html>
