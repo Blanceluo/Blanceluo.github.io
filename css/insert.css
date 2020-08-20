@@ -1,0 +1,10 @@
+.signature {
+  display: none;
+  font-size: 14px;
+}
+
+@media screen and (max-width: 500px) {
+  .signature {
+    display: block;
+  }
+}
