@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{"3XHS":function(e,n,t){"use strict";t.r(n);var a=t("q1tI"),l=t.n(a),r=t("6Gk8"),u=(t("Bl7J"),t("vrFN"));n.default=function(){return l.a.createElement("div",null,l.a.createElement(u.a,{title:"about"}),l.a.createElement(r.a,null),l.a.createElement("pre",null,"江西人氏，江右民系。豫章罗氏，自汉而始。\n生于九七，夏至将至。年二十三，接触互联网十六年有余。\n喜好文学，音乐，摄影，电影，Code。\n追求极致，简单，代码强迫症。\n一个于尘世挣扎的理想主义者，心向闲云野鹤，煮酒焚琴。\n却放不下也不能抛弃肩头重担，一肩父母殷切希望，一肩家庭未来兴衰 。"))}}}]);
-//# sourceMappingURL=component---src-pages-about-js-ba52c4f20594fb59b7d4.js.map
